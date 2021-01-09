@@ -1,7 +1,62 @@
-# custom
-test
+module.exports = {
+  indexJS: `require("dotenv").config();
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const helmet = require("helmet");
 
-# Logs
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+//cors & helmet => for security
+app.use(cors());
+app.use(helmet());
+
+// used to log requests
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+app.use(
+  express.json({
+    extended: false,
+  })
+);
+
+app.get("/", (req, res) => {
+  res.json("API running.");
+});
+
+app.listen(PORT, () => console.log('Server is running at 127.0.0.1:/' + PORT));
+`,
+  packageJson: `{
+  "name": "cloud-storage",
+  "version": "1.0.0",
+  "description": "Back end for Cloud Storage Angular App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "cors": "*",
+    "dotenv": "*",
+    "express": "*",
+    "helmet": "*",
+    "morgan": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  }
+}
+`,
+  env: `NODE_ENV = development`,
+  readmeMd: `# Hello
+  `,
+  gitignore: `# Logs
 logs
 *.log
 npm-debug.log*
@@ -105,3 +160,5 @@ dist
 
 # TernJS port file
 .tern-port
+`,
+};

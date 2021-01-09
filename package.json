@@ -1,0 +1,16 @@
+{
+  "name": "node-express-setup",
+  "version": "1.0.0",
+  "description": "Setup basic node-express server with CLI",
+  "main": "index.js",
+  "repository": "https://github.com/MananDesai54/node-express-setup",
+  "author": "Manan Desai",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "cli-color": "^2.0.0",
+    "inquirer": "^7.3.3"
+  }
+}
