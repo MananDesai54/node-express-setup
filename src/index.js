@@ -1,9 +1,10 @@
 const inquirer = require("inquirer");
 const color = require("cli-color");
-const { writeFileSync, mkdirSync } = require("fs");
-const { exec } = require("child_process");
+const { mkdirSync } = require("fs");
 const { basicData, withFolders } = require("./utils/creationData");
 const { createStructure } = require("./utils/createStructure");
+const { installNodeModules } = require("./utils/installNodeModules");
+const { doTask } = require("./utils/doTask");
 
 const cwd = process.cwd();
 const nameArg = process.argv.slice(2).join();
@@ -26,11 +27,18 @@ async function main() {
       ? `${cwd}/test/${foldername}`
       : `${cwd}/test`;
     if (choice === "basic server setup") {
-      createStructure(basicData().files, basicData().folders, creationPath);
-      console.log(color.green("All files File created"));
+      doTask({
+        files: basicData().files,
+        folders: basicData().folders,
+        creationPath,
+        message: "All files created successfully.",
+      });
     } else if (choice === "server setup with folder structure") {
       createStructure(withFolders().files, withFolders().folders, creationPath);
       console.log(color.green("Structure created"));
+      console.log("===================================");
+      console.log(color.yellow("Installing dependencies........."));
+      installNodeModules(creationPath);
     }
   } catch (error) {
     if (error.isTtyError) {
@@ -41,14 +49,3 @@ async function main() {
   }
 }
 main();
-// exec("cd test", (error, stdout, stderr) => {
-//   if (error) {
-//     console.log(`error: ${error.message}`);
-//     return;
-//   }
-//   if (stderr) {
-//     console.log(`stderr: ${stderr}`);
-//     return;
-//   }
-//   console.log(`stdout: ${stdout}`);
-// });

@@ -27,16 +27,16 @@ app.get("/", (req, res) => {
   res.json("API running.");
 });
 
-app.listen(PORT, () => console.log('Server is running at 127.0.0.1:/' + PORT));
+app.listen(PORT, () => console.log('Server is running at http://127.0.0.1:' + PORT));
 `,
   packageJson: `{
-  "name": "cloud-storage",
+  "name": "${process.cwd().split("\\")[process.cwd().split("\\").length - 1]}",
   "version": "1.0.0",
-  "description": "Back end for Cloud Storage Angular App",
-  "main": "server.js",
+  "description": "Node-express project",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
