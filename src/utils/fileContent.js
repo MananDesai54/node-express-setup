@@ -161,4 +161,36 @@ dist
 # TernJS port file
 .tern-port
 `,
+  configIndexJS: `/**
+* Configurations goes here
+* e.x: Database configuration
+*/
+`,
+  modelsIndexJS: `/**
+* Models goes here according to database
+*/
+`,
+  routesIndexJS: `/**
+* Write routes here
+*/
+
+// const express = require("express");
+// const router = express.Router();
+
+// router.get("sayHello", (req, res) => {
+//   res.send("Hello world");
+// });
+
+// module.exports = router;
+`,
+  utilsIndexJS: `/**
+* write Utility functions
+*/
+
+// module.exports = {
+//   sayHello: () => {
+//     console.log("Hello World");
+//   }
+// }
+`,
 };

@@ -1,9 +1,11 @@
-const { mkdirSync } = require("fs");
+const { mkdirSync, existsSync } = require("fs");
 
 module.exports = {
   createFolders: (folders, creationPath) => {
     folders.forEach((folder) => {
-      mkdirSync(`${creationPath}/${folder}`);
+      if (!existsSync(`${creationPath}/${folder}`)) {
+        mkdirSync(`${creationPath}/${folder}`);
+      }
     });
   },
 };

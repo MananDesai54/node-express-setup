@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const color = require("cli-color");
 const { writeFileSync, mkdirSync } = require("fs");
 const { exec } = require("child_process");
-const { basicData } = require("./utils/creationData");
+const { basicData, withFolders } = require("./utils/creationData");
 const { createStructure } = require("./utils/createStructure");
 
 const cwd = process.cwd();
@@ -19,7 +19,6 @@ async function main() {
         choices: ["basic server setup", "server setup with folder structure"],
       },
     ]);
-    let keyword;
     if (foldername) {
       mkdirSync(`${cwd}/test/${foldername}`);
     }
@@ -27,22 +26,11 @@ async function main() {
       ? `${cwd}/test/${foldername}`
       : `${cwd}/test`;
     if (choice === "basic server setup") {
-      keyword = "basic";
       createStructure(basicData().files, basicData().folders, creationPath);
       console.log(color.green("All files File created"));
     } else if (choice === "server setup with folder structure") {
-      keyword = "with-folders";
-      exec("cd test", (error, stdout, stderr) => {
-        if (error) {
-          console.log(`error: ${error.message}`);
-          return;
-        }
-        if (stderr) {
-          console.log(`stderr: ${stderr}`);
-          return;
-        }
-        console.log(`stdout: ${stdout}`);
-      });
+      createStructure(withFolders().files, withFolders().folders, creationPath);
+      console.log(color.green("Structure created"));
     }
   } catch (error) {
     if (error.isTtyError) {
@@ -53,3 +41,14 @@ async function main() {
   }
 }
 main();
+// exec("cd test", (error, stdout, stderr) => {
+//   if (error) {
+//     console.log(`error: ${error.message}`);
+//     return;
+//   }
+//   if (stderr) {
+//     console.log(`stderr: ${stderr}`);
+//     return;
+//   }
+//   console.log(`stdout: ${stdout}`);
+// });
