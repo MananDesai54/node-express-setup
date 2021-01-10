@@ -2,21 +2,23 @@ const inquirer = require("inquirer");
 const color = require("cli-color");
 const { writeFileSync, mkdirSync } = require("fs");
 const { exec } = require("child_process");
+const { basicData } = require("./utils/creationData");
+const { createStructure } = require("./utils/createStructure");
 
 const cwd = process.cwd();
 const nameArg = process.argv.slice(2).join();
 const foldername = nameArg === "." ? null : nameArg;
 
-inquirer
-  .prompt([
-    {
-      type: "list",
-      message: "Pick the option for setup: ",
-      name: "choice",
-      choices: ["basic server setup", "server setup with folder structure"],
-    },
-  ])
-  .then(({ choice }) => {
+async function main() {
+  try {
+    const { choice } = await inquirer.prompt([
+      {
+        type: "list",
+        message: "Pick the option for setup: ",
+        name: "choice",
+        choices: ["basic server setup", "server setup with folder structure"],
+      },
+    ]);
     let keyword;
     if (foldername) {
       mkdirSync(`${cwd}/test/${foldername}`);
@@ -26,21 +28,7 @@ inquirer
       : `${cwd}/test`;
     if (choice === "basic server setup") {
       keyword = "basic";
-      const files = {
-        "index.js": "indexJS",
-        "package.json": "packageJson",
-        ".env": "env",
-        "README.md": "readmeMd",
-        ".gitignore": "gitignore",
-      };
-      for (let file in files) {
-        writeFileSync(
-          `${creationPath}/${file}`,
-          require("./fileContent")[files[file]]
-        );
-        console.log(`Created.. ${file}`);
-        process;
-      }
+      createStructure(basicData().files, basicData().folders, creationPath);
       console.log(color.green("All files File created"));
     } else if (choice === "server setup with folder structure") {
       keyword = "with-folders";
@@ -56,11 +44,12 @@ inquirer
         console.log(`stdout: ${stdout}`);
       });
     }
-  })
-  .catch((error) => {
+  } catch (error) {
     if (error.isTtyError) {
       console.log(color.red("Can not be rendered in this environment"));
     } else {
-      console.log(color.red(error.message));
+      console.log(color.red(error));
     }
-  });
+  }
+}
+main();
