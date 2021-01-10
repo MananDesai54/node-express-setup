@@ -22,11 +22,9 @@ async function main() {
       },
     ]);
     if (foldername) {
-      mkdirSync(`${cwd}/test/${foldername}`);
+      mkdirSync(`${cwd}/${foldername}`);
     }
-    const creationPath = foldername
-      ? `${cwd}/test/${foldername}`
-      : `${cwd}/test`;
+    const creationPath = foldername ? `${cwd}/${foldername}` : `${cwd}`;
     if (choice === "basic server setup") {
       doTask({
         files: basicData().files,

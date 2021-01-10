@@ -1,9 +1,9 @@
 # node-express-setup
 
-Npm module for setting up basic node.js and express server
+Quickly create node-express project up and running with the use of CLI with security middlewares
 
 # How to use
 
 ```
-
+$ npx node-express-setup [foldername]
 ```

@@ -1,6 +1,6 @@
 {
   "name": "node-express-setup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quickly create node-express project up and running with the use of CLI with security middlewares",
   "main": "src/index.js",
   "bin": "src/index.js",
