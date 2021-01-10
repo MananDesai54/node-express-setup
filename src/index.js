@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const inquirer = require("inquirer");
 const color = require("cli-color");
 const { mkdirSync } = require("fs");

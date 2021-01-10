@@ -1,16 +1,32 @@
 {
   "name": "node-express-setup",
-  "version": "1.0.0",
-  "description": "Setup basic node-express server with CLI",
-  "main": "index.js",
-  "repository": "https://github.com/MananDesai54/node-express-setup",
+  "version": "1.0.1",
+  "description": "Quickly create node-express project up and running with the use of CLI with security middlewares",
+  "main": "src/index.js",
+  "bin": "src/index.js",
   "author": "Manan Desai",
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js"
   },
+  "keywords": [
+    "nodejs",
+    "express",
+    "express.js",
+    "node-express-setup",
+    "node-express",
+    "node-express-boilerplate"
+  ],
   "dependencies": {
     "cli-color": "^2.0.0",
     "inquirer": "^7.3.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MananDesai54/node-express-setup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MananDesai54/node-express-setup/issues"
+  },
+  "homepage": "https://github.com/MananDesai54/node-express-setup#readme"
 }
