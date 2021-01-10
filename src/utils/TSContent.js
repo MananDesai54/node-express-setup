@@ -1,9 +1,10 @@
 module.exports = {
-  indexJS: `require("dotenv").config();
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const helmet = require("helmet");
+  indexTS: `import dotenv from "dotenv";
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import helmet from "helmet";
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,44 +19,57 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(
-  express.json({
-    extended: false,
-  })
+  express.json()
 );
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.json("API running.");
 });
 
-app.listen(PORT, () => console.log('Server is running at http://127.0.0.1:' + PORT));
-`,
-  packageJson: `{
-  "name": "${process.cwd().split("\\")[process.cwd().split("\\").length - 1]}",
-  "version": "1.0.0",
-  "description": "Node-express project",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "*",
-    "cors": "*",
-    "dotenv": "*",
-    "express": "*",
-    "helmet": "*",
-    "morgan": "*"
-  },
-  "devDependencies": {
-    "nodemon": "*"
-  }
-}
+app.listen(PORT, () =>
+  console.log("Server is running at http://127.0.0.1:" + PORT)
+);  
 `,
   env: `NODE_ENV = development`,
   readmeMd: `# Hello
   `,
+  tsConfigJson: `{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "lib": [
+        "dom",
+        "es6",
+        "es2017",
+        "esnext.asynciterable"
+      ],
+      "sourceMap": true,
+      "outDir": "./dist",
+      "moduleResolution": "node",
+      "removeComments": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "baseUrl": "."
+    },
+    "exclude": [
+      "node_modules"
+    ],
+    "include": [
+      "./src/**/*.tsx",
+      "./src/**/*.ts"
+    ]
+  }`,
   gitignore: `# Logs
 logs
 *.log
@@ -161,34 +175,34 @@ dist
 # TernJS port file
 .tern-port
 `,
-  configIndexJS: `/**
+  configIndexTS: `/**
 * Configurations goes here
 * e.x: Database configuration
 */
 `,
-  modelsIndexJS: `/**
+  modelsIndexTS: `/**
 * Models goes here according to database
 */
 `,
-  routesIndexJS: `/**
+  routesIndexTS: `/**
 * Write routes here
 */
 
-// const express = require("express");
+// import express from "express";
 // const router = express.Router();
 
 // router.get("sayHello", (req, res) => {
 //   res.send("Hello world");
 // });
 
-// module.exports = router;
+// export default router;
 `,
-  utilsIndexJS: `/**
+  utilsIndexTS: `/**
 * write Utility functions
 */
 
-// module.exports = {
-//   sayHello: () => {
+// export default {
+//   sayHello: (): void => {
 //     console.log("Hello World");
 //   }
 // }
